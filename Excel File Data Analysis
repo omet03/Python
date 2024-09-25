@@ -1,0 +1,46 @@
+##Basic Data Analysis from Excel File
+import csv
+import statistics
+
+def read_data():
+    data = []
+    with open('sales.csv', 'r') as sales_csv:
+        spreadsheet = csv.DictReader(sales_csv)
+        for row in spreadsheet:
+            data.append(row)
+    return data
+
+def run():
+    data = read_data()
+    sales = []
+    months = []
+
+    for row in data:
+        sale = int(row['sales'])
+        month = row['month'] #accesses the month list in the CSV file
+        sales.append(sale)
+        months.append(month)
+
+#Sums all the sales together
+    total = sum(sales) #sum function adds all items in a list together
+    print('Total sales: {}'.format(total)) #prints result
+#Averages all the sales
+    average = statistics.mean(sales) #calls the mean function from the statistics library to calculate the average
+    print('The average sales across the year are: {}'.format(average)) # prints result
+#Shows the highest sale month
+    highest_sale = max(sales) #max function produces the highest value item of the list
+    highest_sale_month = months[sales.index(highest_sale)] #outputs the month that matches the highest value
+    print('The highest sale made was {} in month {}' .format(highest_sale, highest_sale_month)) #prints result
+#shows lowest sale month
+    lowest_sale = min(sales) #min function brings out the lowest value item in list
+    lowest_sale_month = months[sales.index(lowest_sale)] #brings out the month that matches with the lowest item value
+    print('The lowest sale made was {} in month {}' .format(lowest_sale, lowest_sale_month)) #prints out result
+
+#Calculates monthly changes as perceentages
+    for i in range (1,len(sales)): # creates a for loop that loops through each item in the sales list, represents the index number of each item in the list as 'i'
+        previous_sale = sales[i-1] #previous sale variable is sales[i-1] meaning the previous item that was looped before the one currently being processed
+        current_sale= sales[i] #current sale variable [i] representing the sale that is currently being processed (or looped)
+        percentage_change = ((current_sale - previous_sale)/previous_sale)* 100 #percentage change formula
+        print("From {} to {}: the percentage change was {:.2f}%" .format(months[i-1], months[i], percentage_change)) #prints result
+
+run()
