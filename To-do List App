@@ -1,0 +1,33 @@
+
+# list variable to store to-do list values
+todos = []
+
+while True:
+    user_action = input("Type add, show or exit: ")
+    # This python method ensures the code still runs even when someone adds a trailing space after the string
+    user_action = user_action.strip()
+
+    # matches variable to input and performs action accordingly
+    match user_action:
+        case 'add':
+            todo = input("Enter a todo: ")
+            # .append python method attached to data type to populate the list variable
+            todos.append(todo)
+        case 'show':
+            # for loop will remove extra punctuation that comes with the list (brackets and commas)
+            for item in todos:
+                item = item.title()
+                print(item)
+        case 'exit':
+            break
+        # If you enter a value that does not match the case displays this message
+        case _:
+            print("hey you entered an unknown command: ")
+
+print("Bye!")
+
+
+
+
+
+
