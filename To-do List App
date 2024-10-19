@@ -3,7 +3,7 @@
 todos = []
 
 while True:
-    user_action = input("Type add, show or exit: ")
+    user_action = input("Type add, show, edit or exit: ")
     # This python method ensures the code still runs even when someone adds a trailing space after the string
     user_action = user_action.strip()
 
@@ -20,14 +20,14 @@ while True:
                 print(item)
         case 'exit':
             break
+        # case statement that allows the user to edit a previously entered value
+        case 'edit':
+           number = int(input("Number of the todo to edit: "))
+           number = number - 1
+           new_todo = input("Enter a new todo: ")
+           todos[number] = new_todo
         # If you enter a value that does not match the case displays this message
         case _:
-            print("hey you entered an unknown command: ")
+            print("hey you entered an unknown command, please try again: ")
 
 print("Bye!")
-
-
-
-
-
-
