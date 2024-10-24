@@ -3,7 +3,7 @@
 todos = []
 
 while True:
-    user_action = input("Type add, show, edit or exit: ")
+    user_action = input("Type add, show, edit, complete or exit: ")
     # This python method ensures the code still runs even when someone adds a trailing space after the string
     user_action = user_action.strip()
 
@@ -15,19 +15,31 @@ while True:
             todos.append(todo)
         case 'show':
             # for loop will remove extra punctuation that comes with the list (brackets and commas)
-            for item in todos:
+            for index, item in enumerate(todos):
                 item = item.title()
-                print(item)
-        case 'exit':
-            break
+                # f-string removes any unnecessary spacing
+                row = f"{index+1}-{item}"
+                print(row)
         # case statement that allows the user to edit a previously entered value
         case 'edit':
-           number = int(input("Number of the todo to edit: "))
-           number = number - 1
-           new_todo = input("Enter a new todo: ")
-           todos[number] = new_todo
+            number = int(input("Number of the todo to edit: "))
+            number = number - 1
+            new_todo = input("Enter a new todo: ")
+            todos[number] = new_todo
+        # case statement to mark to-do item as complete and them remove it from the list
+        case 'complete':
+            number = int(input("Number of the todo to complete: "))
+            todos.pop(number-1)
+        case 'exit':
+            break
         # If you enter a value that does not match the case displays this message
         case _:
             print("hey you entered an unknown command, please try again: ")
 
 print("Bye!")
+
+
+
+
+
+
