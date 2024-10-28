@@ -1,7 +1,4 @@
 
-# list variable to store to-do list values
-todos = []
-
 while True:
     user_action = input("Type add, show, edit, complete or exit: ")
     # This python method ensures the code still runs even when someone adds a trailing space after the string
@@ -10,10 +7,27 @@ while True:
     # matches variable to input and performs action accordingly
     match user_action:
         case 'add':
-            todo = input("Enter a todo: ")
+            # "\n" adds a backslash and puts each item in a new line in the text file
+            todo = input("Enter a todo: ") + "\n"
+
+            file = open('todos.txt', 'r')
+            # this reads the content in the file then creates a list
+            todos = file.readlines()
+            file.close()
+
             # .append python method attached to data type to populate the list variable
             todos.append(todo)
+
+            # file variable to store file object (which would be the text file)
+            file = open('todos.txt', 'w')
+            # a method available for file objects, the argument is a list
+            file.writelines(todos)
+            file.close()
         case 'show':
+            file = open('todos.txt', 'r')
+            todos = file.readlines()
+            file.close()
+
             # for loop will remove extra punctuation that comes with the list (brackets and commas)
             for index, item in enumerate(todos):
                 item = item.title()
